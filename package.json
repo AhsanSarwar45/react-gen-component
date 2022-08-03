@@ -4,32 +4,24 @@
   "description": "A script to generate React skeleton components",
   "main": "index.js",
   "repository": "AhsanSarwar45/react-gen-component",
+  "author": "Ahsan Sarwar",
+  "license": "MIT",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "next lint"
   },
   "bin": {
-    "gen-component": "./bin/react-gen-component.mjs",
-    "gen": "./bin/react-gen-component.mjs"
+    "gen-component": "./bin/react-gen-component.js",
+    "gen": "./bin/react-gen-component.js"
   },
-  "author": "Ahsan Sarwar",
-  "license": "MIT",
   "devDependencies": {
-    "@babel/core": "^7.18.10",
-    "@babel/preset-env": "^7.18.10",
-    "@rollup/plugin-babel": "^5.3.1",
-    "@rollup/plugin-commonjs": "^22.0.1",
-    "@rollup/plugin-node-resolve": "^13.3.0",
-    "@rollup/plugin-typescript": "^8.3.4",
     "@types/minimist": "^1.2.2",
     "eslint": "^8.21.0",
-    "rollup": "^2.77.2",
-    "rollup-plugin-terser": "^7.0.2",
-    "tslib": "^2.4.0",
     "typescript": "^4.7.4"
   },
   "dependencies": {
-    "chalk": "^5.0.1",
-    "minimist": "^1.2.6"
+    "chalk": "^4.1.2",
+    "minimist": "^1.2.6",
+    "ts-node": "^10.9.1"
   }
 }
