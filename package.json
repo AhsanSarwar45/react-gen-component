@@ -3,6 +3,7 @@
   "version": "0.2.0",
   "description": "A script to generate React skeleton components",
   "main": "index.js",
+  "repository": "AhsanSarwar45/react-gen-component",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "next lint"

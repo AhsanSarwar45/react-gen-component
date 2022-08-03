@@ -20,10 +20,10 @@ npx gen-component MyComponent
 
 Creates a new component:
 
-```
+```bash
 📁 myComponent
     📄 myComponent.jsx # implementation
-    📄 index.js # to export components and types
+    📄 index.js # to export components
 ```
 
 myComponent.jsx
@@ -63,7 +63,7 @@ npx gen-component MyComponent --ts
 
 Creates a new typescript component:
 
-```
+```bash
 📁 myComponent
     📄 myComponent.tsx # implementation
     📄 index.ts # to export components and types
@@ -129,8 +129,8 @@ export interface MyComponentProps {}
 
     Generates:
 
-    ```
+    ```bash
     📁 my-component
         📄 my-component.jsx # implementation
-        📄 index.js # to export components and types
+        📄 index.js # to export components
     ```
