@@ -117,6 +117,23 @@ export interface MyComponentProps {}
     gen MyComponent --ts
     ```
 
+-   `-d` or `--dir` or `--directory`: Specify components directory. Default: is `.`
+
+    Example:
+
+    ```bash
+    gen MyComponent --dir components
+    ```
+
+    Generates:
+
+    ```bash
+    📁 components
+        📁 myComponent
+            📄 myComponent.jsx # implementation
+            📄 index.js # to export components
+    ```
+
 -   `--c` or `--case`: Specify file name case.
 
     -   `camel` (camelCase) `default`
@@ -137,19 +154,22 @@ export interface MyComponentProps {}
         📄 index.js # to export components
     ```
 
--   `-d` or `--dir` or `--directory`: Specify components directory. Default: is `.`
+-   `--cc` or `--comp-case`: Specify the component file name case. If not specified, it is the same as `--case`.
+
+    -   `camel` (camelCase) `default`
+    -   `kebab` (kebab-case)
+    -   `pascal` (PascalCase)
 
     Example:
 
     ```bash
-    gen MyComponent --dir components
+    gen MyComponent --case kebab --comp-case pascal
     ```
 
     Generates:
 
     ```bash
-    📁 components
-        📁 myComponent
-            📄 myComponent.jsx # implementation
-            📄 index.js # to export components
+    📁 my-component
+        📄 MyComponent.jsx # implementation
+        📄 index.js # to export components
     ```

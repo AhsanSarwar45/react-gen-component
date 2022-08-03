@@ -6,7 +6,7 @@ import minimist from "minimist";
 
 import { component, barrel, type } from "../templates/fileTemplate.mjs";
 import { toCamelCase, toKebabCase, toPascalCase } from "../utility/case.mjs";
-import defaultArgs from "../defaultArgs.json";
+import defaultArgs from "../defaultArgs.mjs" assert {type: "json"}
 
 const cases = {
   camel: toCamelCase,
@@ -26,10 +26,16 @@ const argv = minimist(process.argv.slice(3));
 // console.log(argv)
 
 // Set default case to camel if not specified
-const nameCase = argv.c || argv.case || defaultArgs.case;
+const fileCase = argv.c || argv.case || defaultArgs.case;
+const componentFileCase = argv.cc || argv["comp-case"] || fileCase
 
-if (!(nameCase in cases)) {
+if (!(fileCase in cases)) {
   console.log(chalk.bold.blue('--case'), chalk.red('must be one of the following:'), chalk.bold.green(`${Object.keys(cases).join(" ")}`));
+  process.exit(1);
+}
+
+if (!(componentFileCase in cases)) {
+  console.log(chalk.bold.blue('--comp-case'), chalk.red('must be one of the following:'), chalk.bold.green(`${Object.keys(cases).join(" ")}`));
   process.exit(1);
 }
 
@@ -42,7 +48,8 @@ const fileExtension = isTypescript ? "ts" : "js";
 const componentsDir = argv.d || argv.dir || argv.directory || defaultArgs.directory;
 
 const componentName = toPascalCase(name);
-const fileName = cases[nameCase](name);
+const componentFileName =  cases[componentFileCase](name);
+const fileName =  cases[fileCase](name);
 
 const dir = `${componentsDir}/${fileName}`;
 
@@ -63,7 +70,7 @@ const writeFileErrorHandler = (err) => {
 
 // Create the component file - my-component.tsx
 fs.writeFile(
-  `${dir}/${fileName}.${reactFileExtension}`,
+  `${dir}/${componentFileName}.${reactFileExtension}`,
   component(componentName, isTypescript),
   writeFileErrorHandler
 );
@@ -74,7 +81,7 @@ isTypescript && fs.writeFile(`${dir}/types.ts`, type(componentName), writeFileEr
 // Create the barrel file - index.ts
 fs.writeFile(
   `${dir}/index.${fileExtension}`,
-  barrel(componentName, fileName, isTypescript),
+  barrel(componentName, componentFileName, isTypescript),
   writeFileErrorHandler
 );
 
