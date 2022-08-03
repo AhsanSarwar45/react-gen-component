@@ -9,7 +9,8 @@
     "lint": "next lint"
   },
   "bin": {
-    "gen-component": "./bin/react-gen-component.mjs"
+    "gen-component": "./bin/react-gen-component.mjs",
+    "gen": "./bin/react-gen-component.mjs"
   },
   "author": "Ahsan Sarwar",
   "license": "MIT",

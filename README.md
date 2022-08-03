@@ -1,6 +1,6 @@
 # react-gen-component
 
-Generate react component skeletons.
+Generate react component scaffolds.
 
 ```bash
 npm i -g react-gen-component
@@ -15,7 +15,9 @@ npm i -g react-gen-component
 ## How to use
 
 ```bash
-npx gen-component MyComponent
+gen-component MyComponent
+# Or shorthand
+gen MyComponent
 ```
 
 Creates a new component:
@@ -58,7 +60,7 @@ export default MyComponent;
 ## Typescript
 
 ```bash
-npx gen-component MyComponent --ts
+gen-component MyComponent --ts
 ```
 
 Creates a new typescript component:
@@ -112,7 +114,7 @@ export interface MyComponentProps {}
 -   `--ts` or `--typescript`: Generate typescript files.
 
     ```bash
-    npx gen-component MyComponent --ts
+    gen-component MyComponent --ts
     ```
 
 -   `--case`: Specify file name case.
@@ -124,7 +126,7 @@ export interface MyComponentProps {}
     Example:
 
     ```bash
-    npx gen-component MyComponent --case kebab
+    gen-component MyComponent --case kebab
     ```
 
     Generates:
