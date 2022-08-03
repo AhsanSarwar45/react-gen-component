@@ -60,7 +60,7 @@ export default MyComponent;
 ## Typescript
 
 ```bash
-gen-component MyComponent --ts
+gen MyComponent --ts
 ```
 
 Creates a new typescript component:
@@ -114,10 +114,10 @@ export interface MyComponentProps {}
 -   `--ts` or `--typescript`: Generate typescript files.
 
     ```bash
-    gen-component MyComponent --ts
+    gen MyComponent --ts
     ```
 
--   `--case`: Specify file name case.
+-   `--c` or `--case`: Specify file name case.
 
     -   `camel` (camelCase) `default`
     -   `kebab` (kebab-case)
@@ -126,7 +126,7 @@ export interface MyComponentProps {}
     Example:
 
     ```bash
-    gen-component MyComponent --case kebab
+    gen MyComponent --case kebab
     ```
 
     Generates:
@@ -135,4 +135,21 @@ export interface MyComponentProps {}
     📁 my-component
         📄 my-component.jsx # implementation
         📄 index.js # to export components
+    ```
+
+-   `-d` or `--dir` or `--directory`: Specify components directory. Default: is `.`
+
+    Example:
+
+    ```bash
+    gen MyComponent --dir components
+    ```
+
+    Generates:
+
+    ```bash
+    📁 components
+        📁 myComponent
+            📄 myComponent.jsx # implementation
+            📄 index.js # to export components
     ```

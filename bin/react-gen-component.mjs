@@ -6,6 +6,7 @@ import minimist from "minimist";
 
 import { component, barrel, type } from "../templates/fileTemplate.mjs";
 import { toCamelCase, toKebabCase, toPascalCase } from "../utility/case.mjs";
+import defaultArgs from "../defaultArgs.json";
 
 const cases = {
   camel: toCamelCase,
@@ -24,9 +25,10 @@ const argv = minimist(process.argv.slice(3));
 
 // console.log(argv)
 
-argv.case = argv.case || "camel";
+// Set default case to camel if not specified
+const nameCase = argv.c || argv.case || defaultArgs.case;
 
-if (!(argv.case in cases)) {
+if (!(nameCase in cases)) {
   console.log(chalk.bold.blue('--case'), chalk.red('must be one of the following:'), chalk.bold.green(`${Object.keys(cases).join(" ")}`));
   process.exit(1);
 }
@@ -37,15 +39,10 @@ const reactFileExtension = isTypescript ? "tsx" : "jsx";
 const fileExtension = isTypescript ? "ts" : "js";
 
 // Set default component directory if not specified
-const componentsDir = argv.dir || "./components";
-
-// Create component directory if it doesn't exist
-if (!fs.existsSync(componentsDir)) {
-  fs.mkdirSync(componentsDir);
-}
+const componentsDir = argv.d || argv.dir || argv.directory || defaultArgs.directory;
 
 const componentName = toPascalCase(name);
-const fileName = cases[argv.case](name);
+const fileName = cases[nameCase](name);
 
 const dir = `${componentsDir}/${fileName}`;
 
@@ -56,7 +53,7 @@ if (fs.existsSync(dir)) {
 }
 
 // Create the folder
-fs.mkdirSync(dir);
+fs.mkdirSync(dir, { recursive: true });
 
 const writeFileErrorHandler = (err) => {
   if (err) {
