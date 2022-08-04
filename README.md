@@ -134,7 +134,7 @@ export interface MyComponentProps {}
             📄 index.js # to export components
     ```
 
--   `--c` or `--case`: Specify file name case.
+-   `-c` or `--case`: Specify file name case.
 
     -   `camel` (camelCase) `default`
     -   `kebab` (kebab-case)
