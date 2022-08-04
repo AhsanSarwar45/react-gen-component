@@ -15,16 +15,15 @@ const cases: Cases = {
     pascal: toPascalCase,
 };
 
+const argv: Arguments = minimist(process.argv.slice(2));
+console.log(argv);
+
 // Grab component name from terminal argument
-const [name] = process.argv.slice(2);
+const name = argv._[0];
 if (!name) {
     console.log(chalk.red("You must include a component name!"));
     process.exit(1);
 }
-
-const argv: Arguments = minimist(process.argv.slice(3));
-
-// console.log(argv);
 
 // Set default case to camel if not specified
 const fileCase: string = argv.c || argv.case || defaultArgs.case;
