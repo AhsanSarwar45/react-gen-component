@@ -8,10 +8,9 @@
     "strict": true,  
     "esModuleInterop": true,  
     "resolveJsonModule": true,               
-    "outDir": "out-tsc",
     "rootDir": "./"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.mts", "bin/react-gen-component.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.mts", "bin/react-gen-component.js", "templates/functional/index.js", "templates/functional/component.js"],
   "exclude": ["node_modules"],
 
 }
