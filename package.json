@@ -1,6 +1,6 @@
 {
   "name": "react-gen-component",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "A script to generate React skeleton components",
   "main": "index.js",
   "repository": "AhsanSarwar45/react-gen-component",
