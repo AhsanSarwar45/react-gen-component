@@ -115,7 +115,7 @@ export interface MyComponentProps {}
 
 ## Custom Templates
 
-There are a few templates available by default. You can also create your own templates.
+There are a few [templates](#template) available by default. You can also create your own templates.
 
 1. Create a custom template folder and name it anything you want.
 
