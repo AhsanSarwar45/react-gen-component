@@ -2,6 +2,7 @@ import chalk from "chalk";
 import path from "path";
 import fs from "fs";
 import minimist from "minimist";
+import findConfig from "find-config";
 
 import { getFileNames } from "./utility/files";
 import defaultArgs from "./defaultArgs";
@@ -15,8 +16,27 @@ const cases: Cases = {
     pascal: toPascalCase,
 };
 
-const argv: Arguments = minimist(process.argv.slice(2));
-console.log(argv);
+const configPath = findConfig("gen.config.json");
+
+let defaultArguments = defaultArgs;
+
+if (configPath) {
+    const config = require(configPath);
+    defaultArguments = { ...defaultArguments, ...config };
+}
+
+const argv: Arguments = minimist(process.argv.slice(2), {
+    default: defaultArguments,
+    alias: {
+        case: ["c"],
+        "comp-case": ["cc"],
+        directory: ["d", "dir"],
+        template: ["t"],
+        "template-dir": ["td"],
+        typescript: ["ts"],
+    },
+});
+// console.log(argv);
 
 // Grab component name from terminal argument
 const name = argv._[0];
@@ -25,9 +45,8 @@ if (!name) {
     process.exit(1);
 }
 
-// Set default case to camel if not specified
-const fileCase: string = argv.c || argv.case || defaultArgs.case;
-const componentFileCase: string = argv.cc || argv["comp-case"] || fileCase;
+const fileCase = argv.case || "";
+const componentFileCase = argv["comp-case"] || fileCase;
 
 const caseError = (cmd: string) => {
     console.log(
@@ -46,14 +65,13 @@ if (!(componentFileCase in cases)) {
     caseError("--comp-case");
 }
 
-const isTypescript = argv.typescript || argv.ts;
+const isTypescript = argv.typescript;
 
 const reactFileExtension = isTypescript ? "tsx" : "jsx";
 const fileExtension = isTypescript ? "ts" : "js";
 
 // Set default component directory if not specified
-const componentsDir =
-    argv.d || argv.dir || argv.directory || defaultArgs.directory;
+const componentsDir = argv.directory;
 
 const componentName = toPascalCase(name);
 const componentFileName = cases[componentFileCase](name);
@@ -77,9 +95,9 @@ const writeFileErrorHandler = (err: Error | null) => {
     }
 };
 
-const template = argv.t || argv.template || defaultArgs.template;
+const template = argv.template || "";
 
-const customTemplatesDirArg = argv.td || argv["template-dir"];
+const customTemplatesDirArg = argv["template-dir"];
 const customTemplatesDirPath =
     customTemplatesDirArg && path.resolve(customTemplatesDirArg);
 
