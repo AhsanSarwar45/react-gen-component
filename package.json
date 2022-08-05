@@ -30,6 +30,7 @@
     "gen": "./bin/react-gen-component.js"
   },
   "dependencies": {
+    "@types/find-config": "^1.0.1",
     "@types/minimist": "^1.2.2",
     "chalk": "^4.1.2",
     "find-config": "^1.0.0",
@@ -37,7 +38,6 @@
     "ts-node": "^10.9.1"
   },
   "devDependencies": {
-    "@types/find-config": "^1.0.1",
     "eslint": "^8.21.0",
     "typescript": "^4.7.4"
   }
