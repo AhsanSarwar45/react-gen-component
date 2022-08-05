@@ -9,7 +9,9 @@
     "template",
     "generate",
     "scaffold",
-    "typescript"
+    "typescript",
+    "cli",
+    "tool"
   ],
   "main": "index.js",
   "repository": {

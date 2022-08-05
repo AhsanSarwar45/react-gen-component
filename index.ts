@@ -9,6 +9,7 @@ import defaultArgs from "./defaultArgs";
 import { toCamelCase, toKebabCase, toPascalCase } from "./utility/case";
 import { Arguments } from "./types/arguments";
 import { Cases } from "./types/cases";
+import displayHelp from "./utility/help";
 
 const cases: Cases = {
     camel: toCamelCase,
@@ -27,6 +28,7 @@ if (configPath) {
 
 const argv: Arguments = minimist(process.argv.slice(2), {
     default: defaultArguments,
+    boolean: ["typescript"],
     alias: {
         case: ["c"],
         "comp-case": ["cc"],
@@ -34,9 +36,14 @@ const argv: Arguments = minimist(process.argv.slice(2), {
         template: ["t"],
         "template-dir": ["td"],
         typescript: ["ts"],
+        help: ["h"],
     },
 });
-// console.log(argv);
+
+if (argv.help) {
+    displayHelp();
+    process.exit(0);
+}
 
 // Grab component name from terminal argument
 const name = argv._[0];

@@ -7,4 +7,5 @@ export interface Arguments extends ParsedArgs {
     directory?: string;
     "template-dir"?: string;
     template?: string;
+    help?: boolean;
 }

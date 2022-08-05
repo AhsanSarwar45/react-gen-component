@@ -1,6 +1,6 @@
 # react-gen-component
 
-A customizable script that generates/scaffolds react components from templates.
+A customizable cli tool that generates/scaffolds react components from templates.
 
 ```bash
 npm i -g react-gen-component
@@ -12,7 +12,7 @@ npm i -g react-gen-component
 1. [Typescript](#typescript)
 1. [Custom Templates](#custom-templates)
 1. [Config File](#config-file)
-1. [Arguments](#arguments)
+1. [Options](#options)
 
 ## Usage
 
@@ -149,7 +149,7 @@ There are a few templates available by default. You can also create your own tem
         📄 test.js
 ```
 
-5. In each file, you need to `export default` a function that takes the following arguments:
+5. In each file, you need to `export default` a function that takes the following parameters:
 
 -   `componentName : string` The name of the component you are generating.
 -   `fileName : string` The name of the component file
@@ -210,7 +210,7 @@ You can create a `gen.config.json` file to store your config. The script will se
 }
 ```
 
-## Arguments
+## Options
 
 ### `typescript`
 
@@ -299,7 +299,7 @@ You can create a `gen.config.json` file to store your config. The script will se
 ### `template-dir`
 
 `--td` or `--template-dir`:
-Specify a custom template directory. You can then use the [`template`](#template) argument to specify a custom template. For more info see how to make [custom templates](#custom-templates).
+Specify a custom template directory. You can then use the [`template`](#template) option to specify a custom template. For more info see how to make [custom templates](#custom-templates).
 
 Example:
 
@@ -327,4 +327,12 @@ Generates:
     📄 index.js # to export components
     📄 types.js # for types and interfaces
     📄 animations.js # for animations
+```
+
+### `help`
+
+`-h` or `--help`: Show help.
+
+```bash
+gen --help
 ```
