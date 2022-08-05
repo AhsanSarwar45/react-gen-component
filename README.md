@@ -8,11 +8,13 @@ npm i -g react-gen-component
 
 ## Table of Contents
 
-1. [How to use](#how-to-use)
+1. [Usage](#usage)
 1. [Typescript](#typescript)
-1. [Arguments](#Arguments)
+1. [Custom Templates](#custom-templates)
+1. [Config File](#config-file)
+1. [Arguments](#arguments)
 
-## How to use
+## Usage
 
 ```bash
 gen-component MyComponent
@@ -58,6 +60,8 @@ export default MyComponent;
 ```
 
 ## Typescript
+
+To generate typescript files instead, use the `--typescript` or `--ts` flag:
 
 ```bash
 gen MyComponent --ts
@@ -107,6 +111,103 @@ types.ts
 
 ```ts
 export interface MyComponentProps {}
+```
+
+## Custom Templates
+
+There are a few templates available by default. You can also create your own templates.
+
+1. Create a custom template folder and name it anything you want.
+
+```bash
+📁 templates
+```
+
+2. Create a template folder with the name of the template. If the name is the same as one of the included templates, your custom template will be used whenever you use that name.
+
+```bash
+📁 templates
+    📁 myTemplate
+```
+
+3. Add a file called `component.js` or `component.ts` to the template folder. This file will be renamed to the component name upon generation.
+
+```bash
+📁 templates
+    📁 myTemplate
+        📄 component.js
+```
+
+4. Add any additional file you need. These files can be in typescript too.
+
+```bash
+📁 templates
+    📁 myTemplate
+        📄 component.js
+        📄 index.js
+        📄 types.js
+        📄 test.js
+```
+
+5. In each file, you need to `export default` a function that takes the following arguments:
+
+-   `componentName : string` The name of the component you are generating.
+-   `fileName : string` The name of the component file
+-   `isTypescript : boolean` Has the typescript flag been passed?
+
+The function should return a `string` or `null`.
+
+Example:
+
+```js
+// component.js
+export default (name, fileName, isTypescript) =>
+    `const ${name} = (props${isTypescript ? `: ${name}Props` : ""}) => {
+    return (<></>);
+};
+
+export default ${name};
+`;
+```
+
+If you want to exclude a file conditionally, you can return `null`:
+
+```js
+// types.js
+export default (name, fileName, isTypescript) =>
+    isTypescript ? `export interface ${name}Props {}` : null;
+```
+
+6. Use your custom template like so:
+
+```bash
+gen MyComponent --td templates --t myTemplate
+```
+
+Results in:
+
+```bash
+📁 myComponent
+    📄 myComponent.js
+    📄 index.js
+    📄 types.js
+    📄 test.js
+```
+
+To avoid having to pass the template directory every time, you can use a [config file](#config-file).
+
+## Config File
+
+You can create a `gen.config.json` file to store your config. The script will search for the nearest config file and use that.
+
+```json
+{
+    "directory": "./src/components",
+    "template-dir": "./src/templates",
+    "typescript": true,
+    "case": "kebab"
+    // ... Other parameters if needed
+}
 ```
 
 ## Arguments
@@ -172,4 +273,45 @@ export interface MyComponentProps {}
     📁 my-component
         📄 MyComponent.jsx # implementation
         📄 index.js # to export components
+    ```
+
+-   `-t` or `--template`: Specify the template.
+
+    -   `functional` `default`
+    -   `class`
+
+    Example:
+
+    ```bash
+    gen MyComponent -t class
+    ```
+
+-   `--td` or `--template-dir`: Specify a custom template directory. You can then use the `template` argument to specify a custom template. For more info see how to make [custom templates](#custom-templates).
+
+    Example:
+
+    ```bash
+    📁 customTemplates
+        📁 classComp
+            📄 component.js # implementation
+            📄 index.js # to export components
+            📄 types.js # for types and interfaces
+            📄 animations.js # for animations
+    📁 tests
+    📁 components
+    ...
+    ```
+
+    ```bash
+    gen MyComponent --td customTemplates -t classComp
+    ```
+
+    Generates:
+
+    ```bash
+    📁 myComponent
+        📄 myComponent.jsx # implementation
+        📄 index.js # to export components
+        📄 types.js # for types and interfaces
+        📄 animations.js # for animations
     ```
