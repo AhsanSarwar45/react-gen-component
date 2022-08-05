@@ -180,11 +180,9 @@ export default (name, fileName, isTypescript) =>
 
 6. Use your custom template using the [`template-dir`](#template-dir) and [`--template`](#template) flags.
 
-````bash:
-
 ```bash
 gen MyComponent --td templates --t myTemplate
-````
+```
 
 Results in:
 
