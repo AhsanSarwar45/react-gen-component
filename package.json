@@ -2,10 +2,17 @@
   "name": "react-gen-component",
   "version": "0.5.0",
   "description": "A script to generate React skeleton components",
+  "keywords": ["react", "Script", "component", "template", "generate", "scaffold", "typescript"],
   "main": "index.js",
-  "repository": "AhsanSarwar45/react-gen-component",
+  "repository":  {
+    "type": "git",
+    "url": "git+https://github.com/AhsanSarwar45/react-gen-component.git"
+  },
   "author": "Ahsan Sarwar",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AhsanSarwar45/react-gen-component/issues"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "next lint"

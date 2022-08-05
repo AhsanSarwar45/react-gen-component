@@ -1,6 +1,6 @@
 # react-gen-component
 
-Generate react component scaffolds.
+A customizable script that generates/scaffolds react components from templates.
 
 ```bash
 npm i -g react-gen-component
@@ -61,7 +61,7 @@ export default MyComponent;
 
 ## Typescript
 
-To generate typescript files instead, use the `--typescript` or `--ts` flag:
+To generate typescript files instead, use the [`--typescript`](#typescript-1) or [`--ts`](#typescript-1) flag:
 
 ```bash
 gen MyComponent --ts
@@ -178,11 +178,13 @@ export default (name, fileName, isTypescript) =>
     isTypescript ? `export interface ${name}Props {}` : null;
 ```
 
-6. Use your custom template like so:
+6. Use your custom template using the [`template-dir`](#template-dir) and [`--template`](#template) flags.
+
+````bash:
 
 ```bash
 gen MyComponent --td templates --t myTemplate
-```
+````
 
 Results in:
 
@@ -212,13 +214,17 @@ You can create a `gen.config.json` file to store your config. The script will se
 
 ## Arguments
 
+### `typescript`
+
 -   `--ts` or `--typescript`: Generate typescript files.
 
     ```bash
     gen MyComponent --ts
     ```
 
--   `-d` or `--dir` or `--directory`: Specify components directory. Default: is `.`
+### `directory`
+
+-   `-d` or `--dir` or `--directory`: Specify components directory. Default: is `.` (directory where the script is run).
 
     Example:
 
@@ -234,6 +240,8 @@ You can create a `gen.config.json` file to store your config. The script will se
             📄 myComponent.jsx # implementation
             📄 index.js # to export components
     ```
+
+### `case`
 
 -   `-c` or `--case`: Specify file name case.
 
@@ -255,6 +263,8 @@ You can create a `gen.config.json` file to store your config. The script will se
         📄 index.js # to export components
     ```
 
+### `comp-case`
+
 -   `--cc` or `--comp-case`: Specify the component file name case. If not specified, it is the same as `--case`.
 
     -   `camel` (camelCase) `default`
@@ -275,6 +285,8 @@ You can create a `gen.config.json` file to store your config. The script will se
         📄 index.js # to export components
     ```
 
+### `template`
+
 -   `-t` or `--template`: Specify the template.
 
     -   `functional` `default`
@@ -286,32 +298,35 @@ You can create a `gen.config.json` file to store your config. The script will se
     gen MyComponent -t class
     ```
 
--   `--td` or `--template-dir`: Specify a custom template directory. You can then use the `template` argument to specify a custom template. For more info see how to make [custom templates](#custom-templates).
+### `template-dir`
 
-    Example:
+`--td` or `--template-dir`:
+Specify a custom template directory. You can then use the [`template`](#template) argument to specify a custom template. For more info see how to make [custom templates](#custom-templates).
 
-    ```bash
-    📁 customTemplates
-        📁 classComp
-            📄 component.js # implementation
-            📄 index.js # to export components
-            📄 types.js # for types and interfaces
-            📄 animations.js # for animations
-    📁 tests
-    📁 components
-    ...
-    ```
+Example:
 
-    ```bash
-    gen MyComponent --td customTemplates -t classComp
-    ```
-
-    Generates:
-
-    ```bash
-    📁 myComponent
-        📄 myComponent.jsx # implementation
+```bash
+📁 customTemplates
+    📁 classComp
+        📄 component.js # implementation
         📄 index.js # to export components
         📄 types.js # for types and interfaces
         📄 animations.js # for animations
-    ```
+📁 tests
+📁 components
+...
+```
+
+```bash
+gen MyComponent --td customTemplates -t classComp
+```
+
+Generates:
+
+```bash
+📁 myComponent
+    📄 myComponent.jsx # implementation
+    📄 index.js # to export components
+    📄 types.js # for types and interfaces
+    📄 animations.js # for animations
+```
