@@ -161,8 +161,9 @@ Example:
 
 ```js
 // component.js
-export default (name, fileName, isTypescript) =>
-    `const ${name} = (props${isTypescript ? `: ${name}Props` : ""}) => {
+export default (name, fileName, isTypescript) => `
+
+const ${name} = (props${isTypescript ? `: ${name}Props` : ""}) => {
     return (<></>);
 };
 
@@ -178,7 +179,7 @@ export default (name, fileName, isTypescript) =>
     isTypescript ? `export interface ${name}Props {}` : null;
 ```
 
-6. Use your custom template using the [`template-dir`](#template-dir) and [`--template`](#template) flags.
+6. Use your custom template using the [`template-dir`](#template-dir) and [`--template`](#template) options.
 
 ```bash
 gen MyComponent --td templates --t myTemplate
