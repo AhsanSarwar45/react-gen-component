@@ -130,12 +130,12 @@ There are a few [templates](#template) available by default. You can also create
     📁 myTemplate
 ```
 
-3. Add a file called `component.js` or `component.ts` to the template folder. This file will be renamed to the component name upon generation.
+3. Add a file called `component.jsx.js` or `component.jsx.ts` to the template folder. Any occurrences of the word `component` will be replaced with the component name. The resulting file will be called `component.jsx` or `component.tsx` if the [`--typescript`](#typescript) flag has been passed.
 
 ```bash
 📁 templates
     📁 myTemplate
-        📄 component.js
+        📄 component.jsx.js
 ```
 
 4. Add any additional file you need. These files can be in typescript too.
@@ -143,10 +143,11 @@ There are a few [templates](#template) available by default. You can also create
 ```bash
 📁 templates
     📁 myTemplate
-        📄 component.js
-        📄 index.js
-        📄 types.js
-        📄 test.js
+        📄 component.jsx.js
+        📄 component.stories.jsx.js
+        📄 component.test.jsx.js
+        📄 types.js.js
+        📄 index.js.js
 ```
 
 5. In each file, you need to `export default` a function that takes the following parameters:
@@ -189,10 +190,10 @@ Results in:
 
 ```bash
 📁 myComponent
-    📄 myComponent.js
-    📄 index.js
-    📄 types.js
-    📄 test.js
+    📄 myComponent.jsx # myComponent.tsx if --typescript is passed
+    📄 myComponent.stories.jsx
+    📄 myComponent.test.jsx
+    📄 index.js # index.ts if --typescript is passed
 ```
 
 To avoid having to pass the template directory every time, you can use a [config file](#config-file).

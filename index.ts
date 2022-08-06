@@ -139,19 +139,57 @@ const templateDir = fs.opendirSync(templatePath);
 let dirent;
 // Loop through all the files in the template directory
 while ((dirent = templateDir.readSync()) !== null) {
+    const templateFilePath = `${templatePath}/${dirent.name}`;
     // Dynamically import the template function
-    const templateCreator = require(`${templatePath}/${dirent.name}`).default;
-    // Get file name without extensions
-    const templateFileName: string = dirent.name.replace(/\.[^/.]+$/, "");
-    const fileName =
-        templateFileName === "component"
-            ? `${componentFileName}.${reactFileExtension}`
-            : `${templateFileName}.${fileExtension}`;
+    const templateCreator = require(templateFilePath).default;
+
+    if (typeof templateCreator !== "function") {
+        console.log(
+            chalk.blue(`${templateFilePath}`),
+            chalk.red("does not export a function!")
+        );
+        process.exit(1);
+    }
+
+    dirent.name = dirent.name.replace(/\.[^/.]+$/, "");
+
+    const templateFileExtension = path.extname(dirent.name);
+
+    let fileExtension = "";
+
+    if (templateFileExtension === ".tsx" || templateFileExtension === ".jsx") {
+        fileExtension = isTypescript ? ".tsx" : ".jsx";
+    } else if (
+        templateFileExtension === ".ts" ||
+        templateFileExtension === ".js"
+    ) {
+        fileExtension = isTypescript ? ".ts" : ".js";
+    } else {
+        fileExtension = templateFileExtension;
+    }
+
+    // Replace 'component' with the component name and remove extension
+    const fileName: string = dirent.name
+        .replace(/component/g, componentFileName)
+        .replace(/\.[^/.]+$/, fileExtension);
+
     const fileContent = templateCreator(
         componentName,
         componentFileName,
         isTypescript
     );
+
+    if (typeof fileContent !== "string" && fileContent !== null) {
+        console.log(
+            chalk.blue(`${templateFilePath}`),
+            chalk.red("does not export a function that returns a"),
+            chalk.yellow("string"),
+            chalk.red("or"),
+            chalk.yellow("null")
+        );
+        process.exit(1);
+    }
+
     if (fileContent !== null) {
         fs.writeFile(`${dir}/${fileName}`, fileContent, writeFileErrorHandler);
     }
