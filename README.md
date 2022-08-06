@@ -161,7 +161,7 @@ The function should return a `string` or `null`.
 Example:
 
 ```js
-// component.js
+// component.jsx.js
 export default (name, fileName, isTypescript) => `
 
 const ${name} = (props${isTypescript ? `: ${name}Props` : ""}) => {
@@ -175,7 +175,7 @@ export default ${name};
 If you want to exclude a file conditionally, you can return `null`:
 
 ```js
-// types.js
+// types.js.js
 export default (name, fileName, isTypescript) =>
     isTypescript ? `export interface ${name}Props {}` : null;
 ```
