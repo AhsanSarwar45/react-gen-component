@@ -1,16 +1,19 @@
 export const toCamelCase = (str: string) => {
     return str
-        .replace(/(?:^\w|[A-Z]|\b\w)/g, (word, offset) =>
-            offset === 0 ? word.toLowerCase() : word.toUpperCase()
-        )
+        .replace(/(-|_)+/g, " ")
+        .replace(/(?:^\w|[A-Z]|\b\w)/g, function (word, index) {
+            return index === 0 ? word.toLowerCase() : word.toUpperCase();
+        })
         .replace(/\s+/g, "");
 };
 
 export const toKebabCase = (str: string) => {
-    return str.replace(
-        /[A-Z]+(?![a-z])|[A-Z]/g,
-        (word, offset) => (offset === 0 ? "" : "-") + word.toLowerCase()
-    );
+    return str
+        .replace(
+            /[A-Z]+(?![a-z])|[A-Z]/g,
+            (word, offset) => (offset === 0 ? "" : "-") + word.toLowerCase()
+        )
+        .replace(/(-|_|\s)+/g, "-");
 };
 
 export const toPascalCase = (str: string) => {

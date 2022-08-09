@@ -1,16 +1,22 @@
 {
-  "compilerOptions": {
-    "target": "esnext",                          
-    "moduleResolution": "node",
-    "module": "commonjs",                    
-    "noEmitOnError": true,
-    "lib": ["esnext"],                            
-    "strict": true,  
-    "esModuleInterop": true,  
-    "resolveJsonModule": true,               
-    "rootDir": "./"
-  },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.mts", "bin/react-gen-component.js"],
-  "exclude": ["node_modules"],
-
+    "compilerOptions": {
+        "target": "esnext",
+        "moduleResolution": "node",
+        "module": "commonjs",
+        "noEmitOnError": true,
+        "lib": ["esnext"],
+        "strict": true,
+        "esModuleInterop": true,
+        "resolveJsonModule": true,
+        "rootDir": "./"
+    },
+    "include": [
+        "next-env.d.ts",
+        "**/*.ts",
+        "**/*.tsx",
+        "**/*.mts",
+        "bin/react-gen-component.js",
+        "tests/case.test.ts"
+    ],
+    "exclude": ["node_modules"]
 }
