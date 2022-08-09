@@ -1,6 +1,6 @@
 {
   "name": "react-gen-component",
-  "version": "0.5.7",
+  "version": "1.0.0",
   "description": "A script to generate React skeleton components",
   "keywords": [
     "react",
