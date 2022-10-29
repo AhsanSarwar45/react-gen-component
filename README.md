@@ -117,28 +117,35 @@ export interface MyComponentProps {}
 
 There are a few [templates](#template) available by default. You can also create your own templates.
 
-1. Create a custom template folder and name it anything you want.
+1. Create a custom template folder and name it anything you want. All your templates will be a subdirectory of this folder.
 
 ```bash
 📁 templates
 ```
 
-2. Create a template folder with the name of the template. If the name is the same as one of the included templates, your custom template will be used whenever you use that name.
+2. Create a folder with the name of the template. If the name is the same as one of the included templates, your custom template will be giver higher precedence and will be used whenever you use that name.
 
 ```bash
 📁 templates
     📁 myTemplate
 ```
 
-3. Add a file called `component.jsx.js` or `component.jsx.ts` to the template folder. Any occurrences of the word `component` will be replaced with the component name. The resulting file will be called `component.jsx` or `component.tsx` if the [`--typescript`](#typescript) flag has been passed.
+3. Add a file called `component.jsx.js` or `component.jsx.ts`
 
 ```bash
 📁 templates
     📁 myTemplate
         📄 component.jsx.js
 ```
+Anatomy of template file names: `[a].[b].[c]`
 
-4. Add any additional file you need. These files can be in typescript too.
+`[a]`: The name of the file. Occurrences of the word `component` will be replaced with the component name.
+
+`[b]`: The extension of the generated file file. If the [`--typescript`](#typescript) flag has been passed, any occurrences of `js` will be replaced with `ts` (eg. `jsx` to `tsx`). 
+
+`[c]`: The extension of the template file. Can be `.ts` or `.js`.
+
+4. Add any additional file(s) you need. These files can be in typescript too.
 
 ```bash
 📁 templates
@@ -190,10 +197,26 @@ Results in:
 
 ```bash
 📁 myComponent
-    📄 myComponent.jsx # myComponent.tsx if --typescript is passed
+    📄 myComponent.jsx
     📄 myComponent.stories.jsx
     📄 myComponent.test.jsx
-    📄 index.js # index.ts if --typescript is passed
+    📄 index.js
+```
+Or if the [`--typescript`](#typescript) flag is passed:
+
+```bash
+gen MyComponent --td templates --t myTemplate --typescript
+```
+
+Results in:
+
+```bash
+📁 myComponent
+    📄 myComponent.tsx
+    📄 myComponent.stories.tsx
+    📄 myComponent.test.tsx
+    📄 types.ts
+    📄 index.ts
 ```
 
 To avoid having to pass the template directory every time, you can use a [config file](#config-file).
